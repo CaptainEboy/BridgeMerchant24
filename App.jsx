@@ -3,17 +3,87 @@ import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import SearchHistory from './components/searchHistory';
+import Categories from './components/categories';
+import SearchScreenPage from './screens/searchScreen';
+import SearchHistories from './components/searchHistories';
+import SearchBar from './components/searchBar';
+
+//Hide header
+//https://stackoverflow.com/questions/68694053/remove-header-title-from-react-navigation
+//Make Search Bar icon visible
+// https://stackoverflow.com/questions/71969890/how-can-i-override-tabbaroptions-and-change-the-color-of-the-navigation-icons
+// https://www.npmjs.com/package/react-native-vector-icons#usage-examples
+// https://ionic.io/ionicons
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+
 
 const Tab = createBottomTabNavigator();
 
+// function MyTabs() {
+//   return (
+//     <Tab.Navigator>
+//       <Tab.Screen name="Home" component={HomeScreen} />
+//       <Tab.Screen name="Search" component={SearchScreen} />
+//       <Tab.Screen name="Trend" component={TrendScreen} />
+//       <Tab.Screen name="Order" component={OrderScreen} />
+//       <Tab.Screen name="Profile" component={ProfileScreen} />
+//     </Tab.Navigator>
+//   );
+// }
+
 function MyTabs() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Trend" component={TrendScreen} />
-      <Tab.Screen name="Order" component={OrderScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+    <Tab.Navigator 
+      screenOptions={{
+        // activeTintColor: '#90EE90',
+        headerShown: false,
+        tabBarInactiveTintColor: "#000", 
+        tabBarActiveTintColor: "green"
+      }}
+    >
+      <Tab.Screen name="Home" component={HomeScreen}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ focused, size }) => (
+            <MaterialCommunityIcons name="home-outline" color={focused ? "green" : "#000"} size={size} />
+          ),
+        }} 
+      />
+      <Tab.Screen name="Search" component={SearchScreen}
+        options={{
+          tabBarLabel: 'Search',
+          tabBarIcon: ({ focused, size }) => (
+            <Ionicons name="search" color={focused ? "green" : "#000"} size={size} />
+          ),
+        }} 
+      />
+      <Tab.Screen name="Trend" component={TrendScreen} 
+        options={{
+          tabBarLabel: 'Trend',
+          tabBarIcon: ({ focused, size }) => (
+            <Ionicons name="trending-up-outline" color={focused ? "green" : "#000"} size={size} />
+          ),
+        }} 
+      />
+      <Tab.Screen name="Order" component={OrderScreen}
+        options={{
+          tabBarLabel: 'Order',
+          tabBarIcon: ({ focused, size }) => (
+            <Ionicons name="reorder-four-outline" color={focused ? "green" : "#000"} size={size} />
+          ),
+        }} 
+      />
+      <Tab.Screen name="Profile" component={ProfileScreen}
+        options={{
+          tabBarLabel: 'Profile',
+          tabBarIcon: ({ focused, size }) => (
+            <Ionicons name="person-outline" color={focused ? "green" : "#000"} size={size} />
+          ),
+        }}  
+      />
     </Tab.Navigator>
   );
 }
@@ -22,11 +92,9 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>
-        Go to Profile
-      </Button>
+    <View>
+       <SearchHistory />
+       <Categories />
     </View>
   );
 }
@@ -35,11 +103,8 @@ function HomeScreen() {
 function SearchScreen() {
   const navigation = useNavigation();
 
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Search Screen</Text>
-      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    </View>
+  return (  
+      <SearchScreenPage /> 
   );
 }
 
@@ -48,10 +113,11 @@ function TrendScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Trend Screen</Text>
-      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    </View>
+    // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    //   <Text>Trend Screen</Text>
+    //   <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    // </View>
+    <SearchHistories />
   );
 }
 
@@ -60,10 +126,11 @@ function OrderScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Order Screen</Text>
-      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    </View>
+    // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    //   <Text>Order Screen</Text>
+    //   <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    // </View>
+    <SearchBar />
   );
 }
 
