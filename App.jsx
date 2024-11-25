@@ -8,6 +8,7 @@ import Categories from './components/categories';
 import SearchScreenPage from './screens/searchScreen';
 import SearchHistories from './components/searchHistories';
 import SearchBar from './components/searchBar';
+import Products from './components/products';
 
 //Hide header
 //https://stackoverflow.com/questions/68694053/remove-header-title-from-react-navigation
@@ -139,10 +140,11 @@ function ProfileScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Profile Screen</Text>
-      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    </View>
+    // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    //   <Text>Profile Screen</Text>
+    //   <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    // </View>
+    <Products />
   );
 }
 
