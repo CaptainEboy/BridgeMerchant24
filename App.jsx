@@ -9,6 +9,7 @@ import SearchScreenPage from './screens/searchScreen';
 import SearchHistories from './components/searchHistories';
 import SearchBar from './components/searchBar';
 import Products from './components/products';
+import TanStackScreenPage from './screens/tanStackScreen';
 
 //Hide header
 //https://stackoverflow.com/questions/68694053/remove-header-title-from-react-navigation
@@ -85,6 +86,14 @@ function MyTabs() {
           ),
         }}  
       />
+      <Tab.Screen name="TanStack" component={TanStackScreen}
+        options={{
+          tabBarLabel: 'TanStack',
+          tabBarIcon: ({ focused, size }) => (
+            <Ionicons name="person-outline" color={focused ? "green" : "#000"} size={size} />
+          ),
+        }}  
+      />
     </Tab.Navigator>
   );
 }
@@ -136,6 +145,8 @@ function OrderScreen() {
 }
 
 
+
+
 function ProfileScreen() {
   const navigation = useNavigation();
 
@@ -145,6 +156,15 @@ function ProfileScreen() {
     //   <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     // </View>
     <Products />
+  );
+}
+
+function TanStackScreen() {
+  const navigation = useNavigation();
+
+  return (
+    <TanStackScreenPage />
+    
   );
 }
 
