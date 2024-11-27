@@ -88,19 +88,24 @@ const Products = () => {
         <FlatList
         data={data}
         renderItem={({ item }) => (
-          <View style={[styles.fruitCard, { backgroundColor: 'yellow' }]}>
-            <Image source={{ uri: item.image }} style={styles.tinyLogo} />
-            <View style={styles.resultInfo}>
-            <Text numberOfLines={1} style={styles.resultTitle}>{item.title}</Text>
-              <Text numberOfLines={1} style={styles.fruitCardText}>
-                  {item.description}
-              </Text>
-              <Text style={styles.resultPrice}>${item.price}</Text>
+          <SafeAreaView style={styles.firstContentRow}>
+            <View style={[styles.fruitCard, { backgroundColor: 'yellow' }]}>
+              <Image source={{ uri: item.image }} style={styles.tinyLogo} />
+              <View style={styles.resultInfo}>
+                <Text numberOfLines={1} style={styles.resultTitle}>{item.title}</Text>
+                <Text numberOfLines={1} style={styles.fruitCardText}>
+                    {item.description}
+                </Text>
+                <Text style={styles.resultPrice}>${item.price}</Text>
+              </View>
             </View>
-          </View>
+          </SafeAreaView>
         )}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
+        // add a space between the items only, the space should not affect the right or left of the flatlist
+        columnWrapperStyle={{ justifyContent: 'space-between' }}
+
 
 
         ListHeaderComponent={
