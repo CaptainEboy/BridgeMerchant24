@@ -17,6 +17,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 // For Search Bar History
 import { Pressable } from 'react-native';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
+// import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // import Categories from './categories';
 
 import {
@@ -42,6 +45,42 @@ const Products = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const queryClient = useQueryClient();
   const [apiResponse, setApiResponse] = useState('');
+
+  const [searchHistory, setSearchHistory] = useState([]);
+  // const [searchQuery, setSearchQuery] = useState('');
+
+  //Search History Code
+  useEffect(() => {
+    const loadSearchHistory = async () => {
+      try {
+        const storedSearchHistory = await AsyncStorage.getItem('searchHistory');
+        if (storedSearchHistory) {
+          setSearchHistory(JSON.parse(storedSearchHistory));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    loadSearchHistory();
+  }, []);
+
+
+  // const handleSearch = async () => {
+  //   if (searchQuery.trim() !== '') {
+  //     const newSearchHistory = [...searchHistory, searchQuery];
+  //     setSearchHistory(newSearchHistory);
+  //     await AsyncStorage.setItem('searchHistory', JSON.stringify(newSearchHistory));
+  //     setSearchQuery('');
+  //   }
+  // };
+
+  const handleClearSearchHistory = async () => {
+    await AsyncStorage.removeItem('searchHistory');
+    setSearchHistory([]);
+  };
+  // End of Search History Code
+
+
 
   const fetchApiData = async (searchQuery) => {
     const filteredData = apiResponse.filter((item) =>
@@ -71,8 +110,14 @@ const Products = () => {
   });
   
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     queryClient.invalidateQueries('apiData');
+    if (searchQuery.trim() !== '') {
+      const newSearchHistory = [...searchHistory, searchQuery];
+      setSearchHistory(newSearchHistory);
+      await AsyncStorage.setItem('searchHistory', JSON.stringify(newSearchHistory));
+      setSearchQuery('');
+    }
   };
 
   
@@ -100,7 +145,7 @@ const Products = () => {
                   <Text style={[styles.fruitCardText, {marginTop:3, textAlign:"left", color:'lightgreen', fontSize: 16, fontWeight:"800"}]}>${item.price}</Text>
                 </View>
                 <View style={{backgroundColor:"green", alignSelf:"flex-end", marginBottom:-19, borderRadius:15, padding:4 }}>
-                  <Ionicons name="add-outline" color="#fff" size={36} />
+                  <Ionicons name="add-outline" color="#fff" size={34} />
                 </View>
             </View>
           </SafeAreaView>
@@ -125,7 +170,10 @@ const Products = () => {
                   placeholder="Search"
                 />
               </View>
-              <MaterialCommunityIcons name="tune" size={24} color="green" style={styles.toggleIcon} />
+
+              <Pressable onPress={handleSearch}>
+                <MaterialCommunityIcons name="tune" size={24} color="green" style={styles.toggleIcon} />
+              </Pressable>
             </View>
 
 
@@ -134,14 +182,24 @@ const Products = () => {
               <View>
                 <Text style={styles.searchHistory}>Search History</Text>
               </View>
-              <View style={{marginLeft:-50}}>
-                <Text style={styles.clearSearchHistory}>clear</Text>
-              </View>
+              <Pressable onPress={handleClearSearchHistory}>
+                <View style={{marginLeft:-50}}>
+                  <Text style={styles.clearSearchHistory}>clear</Text>
+                </View>
+              </Pressable>
             </View>
 
 
             {/* Search History */}
             <View style={styles.searchHistoryContainer}>
+              <View style={styles.historyContainer}>
+                {searchHistory.slice(0, 12).map((item, index) => (
+                  <View key={index} style={[styles.historyItem, index % 4 === 0 && { marginLeft: 0 }, index % 4 !== 0 && { marginLeft: 10 }]}>
+                    <Text style={styles.historyText}>{item}</Text>
+                  </View>
+                ))}
+              </View>
+
               {ButtonData.map((item, index) => (
                 <View key={item.id} style={[styles.buttonContainer, { width: '20%' }]}>
                   <Pressable
@@ -388,6 +446,30 @@ const styles = StyleSheet.create({
           fontWeight: "bold",
           marginTop: responsiveHeight(4)
         },
+
+
+
+
+        historyContainer: {
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-start',
+          marginTop: 20,
+        },
+      
+        historyItem: {
+          width: '22%',
+          height: 50,
+          backgroundColor: '#ccc',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginBottom: 10,
+        },
+        historyText: {
+          fontSize: 14,
+        },
+      
   });
   
     
