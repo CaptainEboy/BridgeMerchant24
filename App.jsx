@@ -8,8 +8,9 @@ import Categories from './components/categories';
 import SearchScreenPage from './screens/searchScreen';
 import SearchHistories from './components/searchHistories';
 import SearchBar from './components/searchBar';
-import Products from './components/products';
+// import Products from './components/products';
 import TanStackScreenPage from './screens/tanStackScreen';
+import ProductsTanStackPage from './screens/productsTanStack';
 
 //Hide header
 //https://stackoverflow.com/questions/68694053/remove-header-title-from-react-navigation
@@ -155,7 +156,8 @@ function ProfileScreen() {
     //   <Text>Profile Screen</Text>
     //   <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     // </View>
-    <Products />
+    // <Products />
+    <ProductsTanStackPage />
   );
 }
 

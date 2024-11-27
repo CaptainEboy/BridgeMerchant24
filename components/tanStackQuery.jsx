@@ -134,8 +134,11 @@ const TanStackSearchBar = () => {
               {/* <Image source={{ uri: item.imageUrl }} style={styles.resultImage} /> */}
               <Image source={{ uri: item.image }} style={styles.resultImage} />
               <View style={styles.resultInfo}>
-              <Text style={styles.resultTitle}>{item.title}</Text>
-                <Text style={styles.resultDescription}>{item.description}</Text>
+              <Text numberOfLines={1} style={styles.resultTitle}>{item.title}</Text>
+                <Text numberOfLines={1}
+                  style={styles.resultDescription}>
+                    {item.description}
+                </Text>
                 <Text style={styles.resultPrice}>${item.price}</Text>
               </View>
             </View>
