@@ -1,5 +1,6 @@
 // https://www.npmjs.com/package/@tanstack/react-query
 // https://tanstack.com/query/latest/docs/framework/react/overview
+// https://ionic.io/ionicons
 import React, { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { SafeAreaView, StyleSheet, Text, View, TextInput, FlatList, ScrollView } from 'react-native';
@@ -89,15 +90,18 @@ const Products = () => {
         data={data}
         renderItem={({ item }) => (
           <SafeAreaView style={styles.firstContentRow}>
-            <View style={[styles.fruitCard, { backgroundColor: 'yellow' }]}>
-              <Image source={{ uri: item.image }} style={styles.tinyLogo} />
-              <View style={styles.resultInfo}>
-                <Text numberOfLines={1} style={styles.resultTitle}>{item.title}</Text>
-                <Text numberOfLines={1} style={styles.fruitCardText}>
-                    {item.description}
-                </Text>
-                <Text style={styles.resultPrice}>${item.price}</Text>
-              </View>
+            <View style={[styles.fruitCard, { backgroundColor: '#fff', borderColor:"#ccc" }]}>
+              <Image source={{ uri: item.image }} style={{height:60, width:60,}} />
+                <View style={{marginHorizontal: 10}}>
+                  <Text numberOfLines={1} style={[styles.fruitCardText, {marginTop:16, fontWeight:"400"} ]}>{item.title}</Text>
+                  <Text numberOfLines={1} style={[styles.fruitCardText, {marginTop:2, fontWeight:"400", fontSize:13, color:"grey"}]}>
+                      {item.description}
+                  </Text>
+                  <Text style={[styles.fruitCardText, {marginTop:3, textAlign:"left", color:'lightgreen', fontSize: 16, fontWeight:"800"}]}>${item.price}</Text>
+                </View>
+                <View style={{backgroundColor:"green", alignSelf:"flex-end", marginBottom:-19, borderRadius:15, padding:4 }}>
+                  <Ionicons name="add-outline" color="#fff" size={36} />
+                </View>
             </View>
           </SafeAreaView>
         )}
@@ -157,7 +161,7 @@ const Products = () => {
             {/* Categories */}
             <SafeAreaView>
               <View style={styles.firstContentRow}>
-                <View style={[styles.fruitCard, { backgroundColor: 'yellow' }]}> 	
+                <View style={[styles.fruitCard, { backgroundColor: '#FFB6C1' }]}> 	
                   <Image
                       style={styles.tinyLogo}
                       source={{
