@@ -1,5 +1,17 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
+# Install the app using the link below
+https://drive.google.com/file/d/1u-9QKzCwglVgrMe1TfKn5H_syLg_7Jen/view
+
+# App Screenshots
+## Screenshot 1:
+![Screenshot (4019)](https://github.com/user-attachments/assets/ab2c4571-819e-411b-a516-b59ecd58937f)
+
+
+## Screenshot 2:
+![Screenshot (4020)](https://github.com/user-attachments/assets/d9ff0190-7080-417b-967c-965217a1ecc9)
+
+
 # Getting Started
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
