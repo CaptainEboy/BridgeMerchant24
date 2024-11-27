@@ -3,14 +3,14 @@ import { Text, View } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { Button } from '@react-navigation/elements';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import SearchHistory from './components/searchHistory';
-import Categories from './components/categories';
+// import SearchHistory from './components/searchHistory';
+// import Categories from './components/categories';
 import SearchScreenPage from './screens/searchScreen';
-import SearchHistories from './components/searchHistories';
-import SearchBar from './components/searchBar';
+// import SearchHistories from './components/searchHistories';
+// import SearchBar from './components/searchBar';
 // import Products from './components/products';
-import TanStackScreenPage from './screens/tanStackScreen';
-import ProductsTanStackPage from './screens/productsTanStack';
+// import TanStackScreenPage from './screens/tanStackScreen';
+// import ProductsTanStackPage from './screens/productsTanStack';
 
 //Hide header
 //https://stackoverflow.com/questions/68694053/remove-header-title-from-react-navigation
@@ -42,9 +42,10 @@ function MyTabs() {
     <Tab.Navigator 
       screenOptions={{
         // activeTintColor: '#90EE90',
+        activeTintColor: 'green',
         headerShown: false,
         tabBarInactiveTintColor: "#000", 
-        tabBarActiveTintColor: "green"
+        tabBarActiveTintColor: "lightgreen"
       }}
     >
       <Tab.Screen name="Home" component={HomeScreen}
@@ -59,7 +60,7 @@ function MyTabs() {
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({ focused, size }) => (
-            <Ionicons name="search" color={focused ? "green" : "#000"} size={size} />
+            <Ionicons name="search" color={focused ? "lightgreen" : "#000"} size={size} />
           ),
         }} 
       />
@@ -87,14 +88,14 @@ function MyTabs() {
           ),
         }}  
       />
-      <Tab.Screen name="TanStack" component={TanStackScreen}
+      {/* <Tab.Screen name="TanStack" component={TanStackScreen}
         options={{
           tabBarLabel: 'TanStack',
           tabBarIcon: ({ focused, size }) => (
             <Ionicons name="person-outline" color={focused ? "green" : "#000"} size={size} />
           ),
         }}  
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
@@ -103,10 +104,14 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View>
-       <SearchHistory />
-       <Categories />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
     </View>
+    // <View>
+    //    <SearchHistory />
+    //    <Categories />
+    // </View>
   );
 }
 
@@ -124,11 +129,11 @@ function TrendScreen() {
   const navigation = useNavigation();
 
   return (
-    // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    //   <Text>Trend Screen</Text>
-    //   <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    // </View>
-    <SearchHistories />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Trend Screen</Text>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    </View>
+    // <SearchHistories />
   );
 }
 
@@ -137,11 +142,11 @@ function OrderScreen() {
   const navigation = useNavigation();
 
   return (
-    // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    //   <Text>Order Screen</Text>
-    //   <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    // </View>
-    <SearchBar />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Order Screen</Text>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    </View>
+    // <SearchBar />
   );
 }
 
@@ -152,23 +157,23 @@ function ProfileScreen() {
   const navigation = useNavigation();
 
   return (
-    // <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    //   <Text>Profile Screen</Text>
-    //   <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
-    // </View>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile Screen</Text>
+      <Button onPress={() => navigation.navigate('Home')}>Go to Home</Button>
+    </View>
     // <Products />
-    <ProductsTanStackPage />
+    // <ProductsTanStackPage />
   );
 }
 
-function TanStackScreen() {
-  const navigation = useNavigation();
+// function TanStackScreen() {
+//   const navigation = useNavigation();
 
-  return (
-    <TanStackScreenPage />
+//   return (
+//     <TanStackScreenPage />
     
-  );
-}
+//   );
+// }
 
 export default function App() {
   return (
